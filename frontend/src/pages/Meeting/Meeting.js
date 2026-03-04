@@ -43,20 +43,16 @@ const Meeting = () => {
   // services
   const {
     socket,
-    isConnected: _isWebSocketConnected,
     error: webSocketError,
     sendMessage,
   } = useWebSocketService(roomId, user?.name)
 
   const {
-    localStream: _localStream,
-    isConnected: _isPeerConnected,
     isMuted,
     isVideoEnabled,
     toggleCamera,
     toggleMicrophone,
     shareScreen,
-    endCall: _endCall,
     handleSocketMessage,
   } = usePeerService(localVideoRef, remoteVideoRef, sendMessage, user?.name, setCallStatus)
 
@@ -70,7 +66,6 @@ const Meeting = () => {
     setImageBackground,
     removeBackground,
     startProcessing,
-    stopProcessing: _stopProcessing,
   } = useVirtualBackground()
 
   // Handle virtual background toggle

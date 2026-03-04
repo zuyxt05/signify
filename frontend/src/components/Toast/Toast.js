@@ -28,12 +28,12 @@ export const ToastProvider = ({ children }) => {
         setToasts((prev) => prev.filter((t) => t.id !== id));
     }, []);
 
-    const toast = useCallback({
+    const toast = {
         success: (msg, dur) => addToast(msg, "success", dur),
         error: (msg, dur) => addToast(msg, "error", dur),
         warning: (msg, dur) => addToast(msg, "warning", dur),
         info: (msg, dur) => addToast(msg, "info", dur),
-    }, [addToast]);
+    };
 
     const getIcon = (type) => {
         switch (type) {
