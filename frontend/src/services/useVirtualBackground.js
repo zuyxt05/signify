@@ -27,28 +27,6 @@ const useVirtualBackground = () => {
         backgroundTypeRef.current = backgroundType;
     }, [backgroundType]);
 
-    // Initialize the segmenter
-    const initSegmenter = useCallback(async () => {
-        if (segmenterRef.current) return;
-        setIsLoading(true);
-        try {
-            const { SelfieSegmentation } = await import("@mediapipe/selfie_segmentation");
-            const segmenter = new SelfieSegmentation({
-                locateFile: (file) =>
-                    `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`,
-            });
-            segmenter.setOptions({ modelSelection: 1, selfieMode: true });
-            segmenter.onResults((results) => drawWithBackground(results));
-            await segmenter.initialize();
-            segmenterRef.current = segmenter;
-            console.log("✅ Virtual Background: Model loaded");
-        } catch (err) {
-            console.error("❌ Virtual Background: Failed to load model", err);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [drawWithBackground]);
-
     /**
      * Draw composited frame with virtual background
      * 
@@ -126,6 +104,28 @@ const useVirtualBackground = () => {
         tctx.putImageData(imgData, 0, 0);
         ctx.drawImage(tc, 0, 0);
     }, []);
+
+    // Initialize the segmenter
+    const initSegmenter = useCallback(async () => {
+        if (segmenterRef.current) return;
+        setIsLoading(true);
+        try {
+            const { SelfieSegmentation } = await import("@mediapipe/selfie_segmentation");
+            const segmenter = new SelfieSegmentation({
+                locateFile: (file) =>
+                    `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`,
+            });
+            segmenter.setOptions({ modelSelection: 1, selfieMode: true });
+            segmenter.onResults((results) => drawWithBackground(results));
+            await segmenter.initialize();
+            segmenterRef.current = segmenter;
+            console.log("✅ Virtual Background: Model loaded");
+        } catch (err) {
+            console.error("❌ Virtual Background: Failed to load model", err);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [drawWithBackground]);
 
     // Process video frames loop
     const processFrame = useCallback(async () => {

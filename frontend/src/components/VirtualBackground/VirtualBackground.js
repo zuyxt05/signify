@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./VirtualBackground.module.scss";
 import { IoMdClose } from "react-icons/io";
-import { MdBlurOn, MdBlockFlipped, MdImage, MdUploadFile } from "react-icons/md";
+import { MdBlurOn, MdBlockFlipped, MdUploadFile } from "react-icons/md";
 import { useRef } from "react";
 
 const cx = classNames.bind(styles);

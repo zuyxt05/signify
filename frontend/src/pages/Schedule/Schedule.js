@@ -20,8 +20,6 @@ import {
   getDay,
   isSameMonth,
   isSameDay,
-  addMonths,
-  subMonths,
 } from "date-fns"
 
 const cx = classNames.bind(styles)
@@ -46,11 +44,7 @@ function Schedule() {
   })
   const [selectedMeeting, setSelectedMeeting] = useState(null)
 
-  const [events, setEvents] = useState([
-    { id: 1, title: "Team Meeting", date: new Date(2025, 2, 15, 10, 0), duration: 60 },
-    { id: 2, title: "Project Review", date: new Date(2025, 2, 18, 14, 0), duration: 90 },
-    { id: 3, title: "Client Call", date: new Date(2025, 2, 20, 11, 30), duration: 45 },
-  ])
+
 
 
   useEffect(() => {
