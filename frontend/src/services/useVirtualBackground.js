@@ -47,7 +47,7 @@ const useVirtualBackground = () => {
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [drawWithBackground]);
 
     /**
      * Draw composited frame with virtual background

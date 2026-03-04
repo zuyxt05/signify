@@ -4,22 +4,22 @@ import { useState, useRef, useEffect } from "react";
 const ICE_SERVERS = {
     iceServers: [
         {
-          urls: [
-            'stun:openrelay.metered.ca:80',
-            'turn:openrelay.metered.ca:80',
-            'turn:openrelay.metered.ca:443',
-            'turn:openrelay.metered.ca:443?transport=tcp'
-          ],
-          username: 'openrelayproject',
-          credential: 'openrelayproject'
+            urls: [
+                'stun:openrelay.metered.ca:80',
+                'turn:openrelay.metered.ca:80',
+                'turn:openrelay.metered.ca:443',
+                'turn:openrelay.metered.ca:443?transport=tcp'
+            ],
+            username: 'openrelayproject',
+            credential: 'openrelayproject'
         }
-      ]
+    ]
 };
 
 const usePeerService = (
-    localVideoRef, 
-    remoteVideoRef, 
-    sendMessage, 
+    localVideoRef,
+    remoteVideoRef,
+    sendMessage,
     username,
     setCallStatus
 ) => {
@@ -27,7 +27,7 @@ const usePeerService = (
     const [isConnected, setIsConnected] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoEnabled, setIsVideoEnabled] = useState(true);
-    
+
     // Refs for managing connections
     const peerConnections = useRef(new Map());
     const pendingCandidates = useRef(new Map());
@@ -36,7 +36,7 @@ const usePeerService = (
     const getMedia = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: true, 
+                video: true,
                 audio: true
             });
             setLocalStream(stream);
@@ -56,7 +56,7 @@ const usePeerService = (
         try {
             console.log(`🔄 Khởi tạo kết nối với ${targetUsername}`);
             const pc = new RTCPeerConnection(ICE_SERVERS);
-            
+
             // Xử lý ICE candidates
             pc.onicecandidate = (event) => {
                 if (event.candidate) {
@@ -165,7 +165,7 @@ const usePeerService = (
                     await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
                     const answer = await pc.createAnswer();
                     await pc.setLocalDescription(answer);
-                    
+
                     console.log(`📤 Gửi answer tới ${data.from}`);
                     sendMessage({
                         type: "answer",
@@ -179,7 +179,7 @@ const usePeerService = (
                     const answerPc = peerConnections.current.get(data.from);
                     if (answerPc) {
                         await answerPc.setRemoteDescription(new RTCSessionDescription(data.answer));
-                        
+
                         // Xử lý các candidate đang chờ
                         const candidates = pendingCandidates.current.get(data.from) || [];
                         for (const candidate of candidates) {
@@ -201,6 +201,8 @@ const usePeerService = (
                             pendingCandidates.current.get(data.from).push(data.candidate);
                         }
                     }
+                    break;
+                default:
                     break;
             }
         } catch (error) {
@@ -279,10 +281,10 @@ const usePeerService = (
 
     const shareScreen = async () => {
         try {
-            const screenStream = await navigator.mediaDevices.getDisplayMedia({ 
-                video: true 
+            const screenStream = await navigator.mediaDevices.getDisplayMedia({
+                video: true
             });
-            
+
             const screenTrack = screenStream.getVideoTracks()[0];
 
             if (localVideoRef.current) {
@@ -328,6 +330,7 @@ const usePeerService = (
         return () => {
             endCall();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Khởi tạo media khi component mount
@@ -335,8 +338,9 @@ const usePeerService = (
         if (!localStream) {
             getMedia().catch(console.error);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
 
     return {
         localStream,

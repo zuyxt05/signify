@@ -22,7 +22,7 @@ function SignUp() {
         setLoading(true);
 
         try {
-            const response = await signup({ name, email, password });
+            await signup({ name, email, password });
 
             toast.success("Đăng ký thành công!");
             navigate("/login");

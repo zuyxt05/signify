@@ -85,16 +85,17 @@ const WaitingRoom = () => {
         }
       }
     }
-    if(roomId) {
+    if (roomId) {
       initDevices()
     }
-    
+
     // Cleanup function to stop all tracks when component unmounts
     return () => {
       if (stream) {
         stream.getTracks().forEach((track) => track.stop())
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId])
 
   // Handle device change
@@ -189,7 +190,7 @@ const WaitingRoom = () => {
   }
 
   // Join meeting
-  const joinMeeting =  () => {
+  const joinMeeting = () => {
 
     setIsJoining(true)
 
@@ -210,7 +211,7 @@ const WaitingRoom = () => {
         return
       }
       const response = await getMeetingByCodeMeetingAPI(joinCode.trim());
-      if(!response) {
+      if (!response) {
         alert("Please enter a valid meeting code.")
         return;
       } else {
@@ -218,7 +219,7 @@ const WaitingRoom = () => {
         navigate(`/waiting-room?room=${joinCode}`)
       }
 
-    } catch(error){
+    } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Invalid meeting code. Please check again.");
       } else {
@@ -226,7 +227,7 @@ const WaitingRoom = () => {
       }
     }
 
-  } 
+  }
   return (
     <div className={cx("container")}>
       <div className={cx("content")}>
