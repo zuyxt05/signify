@@ -42,6 +42,11 @@ app.use((req, res, next) => {
 
 app.use(express.json({ limit: "1mb" }));
 
+// Public health-check route (no auth, no rate limit) — keep server alive
+app.get("/ping", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 // Apply rate limiters
 app.use("/api", apiLimiter);
 app.use("/api/auth", authLimiter);
