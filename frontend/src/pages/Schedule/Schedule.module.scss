@@ -1,0 +1,781 @@
+.wrap {
+    width: 100%;
+    min-height: 100%;
+    background-color: #e0f2fe;
+    padding: 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #eee;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+.headerLeft {
+    h1 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+    }
+}
+
+
+.viewToggle {
+    display: flex;
+    gap: 10px;
+}
+
+.viewButton {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+        background-color: #e0e0e0;
+    }
+    
+    &.active {
+        background-color: #1a73e8;
+        color: white;
+        border-color: #1a73e8;
+    }
+}
+
+.headerRight {
+    display: flex;
+    gap: 15px;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+    
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
+}
+
+.searchBar {
+    position: relative;
+    
+    @media (max-width: 768px) {
+        flex: 1;
+    }
+    
+    input {
+        padding: 10px 15px 10px 40px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1.4rem;
+        width: 250px;
+        
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+        
+        &:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+    }
+    
+    .searchIcon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+}
+
+.newMeetingButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+        background-color: #1557b0;
+    }
+    
+    @media (max-width: 576px) {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Calendar Header */
+.calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #eee;
+    
+    h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+    }
+}
+
+.calendarNav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    button {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        
+        &:hover {
+            background-color: #f5f5f5;
+        }
+    }
+    
+    .todayButton {
+        width: auto;
+        padding: 0 15px;
+        border-radius: 18px;
+        font-size: 1.4rem;
+    }
+}
+
+/* Week View */
+.weekView {
+    padding: 20px 30px;
+}
+
+.weekDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+    
+    @media (max-width: 768px) {
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+}
+
+.weekDay {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    
+    &.today {
+        background-color: #e6f7ff;
+        border: 1px solid #1a73e8;
+    }
+    
+    .dayName {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    
+    .dayNumber {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+    }
+}
+
+.weekMeetings {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    
+    @media (max-width: 768px) {
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+}
+
+.dayMeetings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 300px;
+}
+
+.meetingCard {
+    background-color: #e6f7ff;
+    border-left: 4px solid #1a73e8;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    .meetingTime {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    
+    .meetingTitle {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    
+    .meetingHost {
+        font-size: 1.2rem;
+        color: #666;
+    }
+}
+
+/* Day View */
+.dayView {
+    padding: 20px 30px;
+}
+
+.dayViewDate {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dayMeetingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.meetingCardFull {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-left: 4px solid #1a73e8;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.meetingCardHeader {
+    background-color: #f5f5f5;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .meetingTime {
+        font-size: 1.4rem;
+        color: #666;
+    }
+    
+    @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+.meetingCardBody {
+    padding: 15px;
+    
+    .meetingDescription {
+        font-size: 1.4rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .meetingHost, .meetingParticipants {
+        font-size: 1.3rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+}
+
+/* Month View */
+.monthView {
+    padding: 20px 30px;
+}
+
+.monthViewHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+
+
+/* Upcoming Meetings */
+.upcomingMeetings {
+    padding: 20px 30px;
+    border-top: 1px solid #eee;
+    
+    h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+}
+
+.upcomingList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    
+    @media (max-width: 576px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.upcomingMeetingCard {
+    display: flex;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.upcomingDate {
+    width: 80px;
+    background-color: #1a73e8;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.upcomingDetails {
+    flex: 1;
+    padding: 15px;
+    
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    
+    .upcomingTime, .upcomingHost {
+        font-size: 1.3rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+}
+
+.noMeetings {
+    padding: 30px;
+    text-align: center;
+    color: #666;
+    font-size: 1.6rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modalContent {
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    
+    &.meetingDetails {
+        max-width: 500px;
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .closeButton {
+        background: none;
+        border: none;
+        font-size: 2.4rem;
+        cursor: pointer;
+        color: #666;
+        
+        &:hover {
+            color: #333;
+        }
+    }
+}
+
+/* Form Styles */
+.newMeetingForm {
+    padding: 20px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+    
+    label {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    
+    input, textarea {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1.4rem;
+        
+        &:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+    }
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+    
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
+    
+    button {
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        
+        @media (max-width: 576px) {
+            width: 100%;
+        }
+    }
+    
+    .cancelButton {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        color: #333;
+        
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
+    
+    .submitButton {
+        background-color: #1a73e8;
+        border: none;
+        color: white;
+        
+        &:hover {
+            background-color: #1557b0;
+        }
+    }
+}
+
+/* Meeting Details */
+.meetingDetailsContent {
+    padding: 20px;
+    
+    h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+}
+
+.detailsGroup {
+    margin-bottom: 15px;
+    
+    .detailsLabel {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    
+    .detailsValue {
+        font-size: 1.5rem;
+        color: #333;
+    }
+}
+
+.participantsList {
+    list-style-type: disc;
+    padding-left: 20px;
+    
+    li {
+        margin-bottom: 5px;
+    }
+}
+
+.meetingActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
+    
+    .actionButton {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        
+        @media (max-width: 576px) {
+            width: 100%;
+        }
+    }
+    
+    .joinButton {
+        background-color: #1a73e8;
+        border: none;
+        color: white;
+        text-align: center;
+        &:hover {
+            background-color: #1557b0;
+        }
+    }
+    
+    .editButton {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        color: #333;
+        
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
+    
+    .deleteButton {
+        background-color: #fff2f0;
+        border: 1px solid #ffccc7;
+        color: #f5222d;
+        
+        &:hover {
+            background-color: #fff1f0;
+            border-color: #ff7875;
+        }
+    }
+}
+
+/* Month View Styles */
+.scheduleContent {
+    flex: 1;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 20px;
+  }
+  
+
+.monthView {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .monthViewHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f4f4f5;
+    border-bottom: 1px solid #e4e4e7;
+    margin: 0;
+  }
+  
+  .monthViewHeader > div {
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #252424;
+  }
+  
+  .monthGrid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: calc(100vh - 200px);
+    min-height: 600px;
+  }
+  
+  .monthDay {
+    border-right: 1px solid #e4e4e7;
+    border-bottom: 1px solid #e4e4e7;
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #666;
+  }
+  
+  .dayNumber {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .otherMonth {
+    background-color: hsl(var(--muted) / 0.3);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .today {
+    background-color:#e7e7e8;
+  }
+  
+  .today .dayNumber {
+    background-color: #18181b;
+    color: #fff;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dayEvents {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow: hidden;
+  }
+  
+  .eventPill {
+    background-color: #0369a1;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .moreEvents {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+
+  

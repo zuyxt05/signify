@@ -1,0 +1,57 @@
+{
+  "name": "signify",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@zoom/videosdk": "^2.1.5",
+    "antd": "^5.24.1",
+    "axios": "^1.8.4",
+    "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
+    "electron-store": "^10.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "electron": "electron src/electron/main.js",
+    "dev": "concurrently \"npm run start\" \"npm run electron\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^34.2.0",
+    "sass": "^1.85.0"
+  }
+}

@@ -1,0 +1,353 @@
+// Variables
+$primary-color: #1a73e8;
+$secondary-color: #0e131f;
+$text-light: #ffffff;
+$text-dark: #333333;
+$text-muted: #666666;
+$danger-color: #e53935;
+$success-color: #43a047;
+$background-light: #ffffff;
+$background-gray: #f5f5f7;
+$border-color: #e0e0e0;
+$border-radius: 8px;
+$transition-speed: 0.3s;
+$box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Container
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $background-gray;
+  padding: 80px 20px 40px;
+  display: flex;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    padding: 60px 16px 30px;
+  }
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  background-color: $background-light;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+}
+
+// Header
+.header {
+  padding: 30px;
+  background-color: $primary-color;
+  color: $text-light;
+  
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    font-size: 1.6rem;
+    opacity: 0.9;
+  }
+}
+
+// Form
+.meetingForm {
+  padding: 30px;
+  
+  @media (max-width: 576px) {
+    padding: 20px;
+  }
+}
+
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: $text-dark;
+    margin-bottom: 8px;
+    
+    svg {
+      color: $primary-color;
+      font-size: 1.8rem;
+    }
+  }
+  
+  input, textarea, select {
+    padding: 12px 16px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    font-size: 1.5rem;
+    transition: border-color $transition-speed;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+  }
+}
+
+.checkboxLabel {
+  display: flex !important;
+  justify-content: space-between !important;
+  cursor: pointer;
+  
+  .labelText {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    
+    &:checked + .slider {
+      background-color: $primary-color;
+      
+      &:before {
+        transform: translateX(24px);
+      }
+    }
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: $transition-speed;
+    border-radius: 34px;
+    
+    &:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: $transition-speed;
+      border-radius: 50%;
+    }
+  }
+}
+
+.helpText {
+  font-size: 1.3rem;
+  color: $text-muted;
+  margin-top: 6px;
+}
+
+// Meeting Code Section
+.meetingCodeSection {
+  background-color: $background-gray;
+  padding: 20px;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+}
+
+.sectionHeader {
+  @include flex-between;
+  margin-bottom: 16px;
+  
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $text-dark;
+    
+    svg {
+      color: $primary-color;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.refreshButton {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-speed;
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+  }
+}
+
+.codeDisplay {
+  @include flex-between;
+  background-color: $background-light;
+  padding: 16px;
+  border-radius: $border-radius;
+  border: 1px dashed $border-color;
+  margin-bottom: 12px;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.code {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: $text-dark;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: $background-gray;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  color: $text-dark;
+  cursor: pointer;
+  transition: all $transition-speed;
+  
+  &:hover {
+    background-color: darken($background-gray, 5%);
+  }
+  
+  svg {
+    font-size: 1.6rem;
+  }
+  
+  @media (max-width: 576px) {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+// Form Actions
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 30px;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.cancelButton, .createButton {
+  padding: 12px 24px;
+  border-radius: $border-radius;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-speed;
+  
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  color: $text-dark;
+  
+  &:hover {
+    background-color: $background-gray;
+  }
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: $primary-color;
+  border: none;
+  color: $text-light;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+  
+  svg {
+    font-size: 1.4rem;
+  }
+}
+
